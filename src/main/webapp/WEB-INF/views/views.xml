@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+    "-//Apache Software Foundation//DTD Tiles Configuration 2.2//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="maintemplate" template="/WEB-INF/views/main_template.jsp">
+		<put-attribute name="top" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/menu.jsp" />
+	</definition>
+	<definition name="ajaxtemplate" template="/WEB-INF/views/ajax_template.jsp">
+		<put-attribute name="top" value="/WEB-INF/views/header.jsp" />
+	</definition>
+	
+	<definition name="home" template="/WEB-INF/views/mobile/mobile.jsp" />
+	
+	<definition name="output" extends="maintemplate">
+		<put-attribute name="content" value="/WEB-INF/views/output.jsp" />
+	</definition>
+	<definition name="PersonAll" extends="maintemplate">
+		<put-attribute name="content" value="/WEB-INF/views/personlist.jsp" />
+	</definition>
+	<definition name="PersonGet" extends="maintemplate">
+		<put-attribute name="content" value="/WEB-INF/views/person.jsp" />
+	</definition>
+	<definition name="PersonAllAjax" extends="ajaxtemplate">
+		<put-attribute name="content" value="/WEB-INF/views/personlist.jsp" />
+	</definition>
+	<definition name="PersonGetAjax" extends="ajaxtemplate">
+		<put-attribute name="content" value="/WEB-INF/views/person.jsp" />
+	</definition>
+	
+	<definition name="test" template="/WEB-INF/tests/QUnit.jsp" />
+	<definition name="mobile/test" template="/WEB-INF/tests/QUnit.jsp" />
+	
+	<definition name="mobile/PersonAll" template="/WEB-INF/views/mobile/mobile.jsp" />
+	
+	<definition name="mobile/PersonGet" template="/WEB-INF/views/mobile/mobile.jsp" />
+	
+	<definition name="mobile/login" template="/WEB-INF/views/mobile/login.jsp" />
+	<definition name="login" template="/WEB-INF/views/login.jsp" />
+		
+</tiles-definitions>

@@ -1,0 +1,10 @@
+.ui-controlgroup-horizontal .ui-controlgroup-controls {
+	display: block !important; 
+}
+
+.ui-listview>.ui-li-static, .ui-listview>.ui-li-divider {
+    white-space : normal !important;
+}
+.ui-navbar .ui-slider-switch {
+	width: 10em;
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="de.kreth.clubhelperbackend" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean
+						class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String"
+									value="dd/MM/yyyy HH:mm:ss.SSS Z"></constructor-arg>
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+		<mvc:argument-resolvers>
+			<bean
+				class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver" />
+			<bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<!-- User's site preference -->
+	<bean
+		class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor" />
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<mvc:interceptors>
+		<!-- Resolve the device which has generated the request -->
+		<bean
+			class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+
+	</mvc:interceptors>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" />
+
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/views/**/views.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
+		<constructor-arg>
+			<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+			</bean>
+		</constructor-arg>
+		<property name="mobilePrefix" value="mobile/" />
+		<property name="tabletPrefix" value="mobile/" />
+	</bean>
+
+</beans>
